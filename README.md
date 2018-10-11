@@ -9,11 +9,11 @@ TAPP Code Challenge for Software Engineer Candidates
 
 ## Candidate Information (Fill out with your info)
 
-Name: \<your name>
+Name: Sia Xiong
 
-Email: \<your email>
+Email: s.marie.xiong@gmail.com
 
-Resume: \<link to your resume>
+Resume: https://drive.google.com/file/d/1q0k1YB-tl0GgXF57PQnSmR1bYR34mIVw/view?usp=sharing
 
 ## Intro
 
