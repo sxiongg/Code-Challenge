@@ -1,4 +1,4 @@
-package com.tappchallenge;
+package com.app;
 
 import android.app.Application;
 
