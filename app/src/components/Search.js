@@ -36,8 +36,9 @@ class Search extends Component {
                     <TextInput 
                         value={this.state.input} 
                         onChangeText={(text) => {
+                            this.setState({ input: text })
                             if (text.length > 3) {
-                                this.setState({ input: text })
+                                
                                 this.getPlaces('AIzaSyDrO7cL1HVJZEVWEzbhUWGUJ7aKhrge8xI', text)
                             }
                         }} 
@@ -50,7 +51,7 @@ class Search extends Component {
 
 const mapStateToProps = state => {
     return {
-        sendResToRedux: state.searchResults
+        // sendResToRedux: state.searchResults
     }
 }
 

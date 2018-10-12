@@ -9,8 +9,10 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 searchResults: action.payload
             }
+            console.log(state.searchResults)
+        default: 
+            return state
     }
-    return state;
 }
 
 export default rootReducer
