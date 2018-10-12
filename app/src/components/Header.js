@@ -1,21 +1,23 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import BackButton from '../../assets/Button-Back.png'
 
-const renderBackButton = (screen) => {
-    // Function that conditionally renders back button.
+const renderBackButton = ({screen, goBack}) => {
+    // Function that conditionally renders back button if the screen is Search.
     if (screen === 'Search') {
         return (
-            <Image source={BackButton} />
+            <TouchableOpacity onPress={() => goBack}>
+                <Image source={BackButton} />
+            </TouchableOpacity>
         )
     }
 }
 
 const Header = (props) => {
-    // Header component that shows screen title and back button.
+    // Header component showing screen title and back button.
     return (
         <View style={styles.headerRow}>
-            {renderBackButton(props.screen)}
+            {renderBackButton(props)}
             <Text> {props.screen} </Text>
         </View>
     )
@@ -24,6 +26,7 @@ const Header = (props) => {
 const styles = StyleSheet.create({
     headerRow: {
         flexDirection: 'row',
+        marginTop: 25
     }
 })
 export default Header

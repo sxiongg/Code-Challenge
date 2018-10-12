@@ -7,10 +7,14 @@ class Search extends Component {
         super(props)
         this.state = {  }
     }
+
     render() { 
         return ( 
             <View>
-                <Header screen='Search' />
+                <Header 
+                    screen='Search' 
+                    goBack={() => this.props.navigation.goBack()} 
+                />
             </View>
          )
     }
