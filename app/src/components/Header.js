@@ -3,15 +3,16 @@ import { View, Text, Image, StyleSheet } from 'react-native'
 import BackButton from '../../assets/Button-Back.png'
 
 const renderBackButton = (screen) => {
-    let backButton = require('../../assets/Button-Back.png')
-    screen === 'Search'
-    ? 
-    <Image source={backButton} />
-    :
-    null
+    // Function that conditionally renders back button.
+    if (screen === 'Search') {
+        return (
+            <Image source={BackButton} />
+        )
+    }
 }
 
 const Header = (props) => {
+    // Header component that shows screen title and back button.
     return (
         <View style={styles.headerRow}>
             {renderBackButton(props.screen)}

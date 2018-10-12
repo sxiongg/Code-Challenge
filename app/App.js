@@ -7,6 +7,7 @@ import Bookmarks from './src/components/Bookmarks'
 import Place from './src/components/Place'
 
 const StackNavigator = createStackNavigator(
+  // Navigation for app with React Navigation. Built in headers are removed.
   {
     Bookmarks: {
       screen: Bookmarks,
@@ -34,6 +35,7 @@ const StackNavigator = createStackNavigator(
 
 const App = () => {
   return (
+    // Redux wrapper.
     <Provider store={store}>
       <StackNavigator />
     </Provider> 
