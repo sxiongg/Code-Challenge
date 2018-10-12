@@ -1,0 +1,1 @@
+export const setSearchResults = res => ({ type: 'SET_SEARCH_RESULTS', payload: res})
