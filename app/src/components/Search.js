@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Image, TextInput, StyleSheet } from 'react-native'
 import Header from './Header'
 
 class Search extends Component {
@@ -15,9 +15,18 @@ class Search extends Component {
                     screen='Search' 
                     goBack={() => this.props.navigation.goBack()} 
                 />
+                <View style={styles.input}>
+                    <Image source={require('../../assets/list_search.png')} />
+                    <TextInput />
+                </View>
             </View>
          )
     }
 }
- 
+
+const styles = StyleSheet.create({
+    input: {
+        flexDirection: 'row'
+    }
+})
 export default Search
