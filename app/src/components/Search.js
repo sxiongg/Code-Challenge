@@ -5,7 +5,9 @@ import Header from './Header'
 class Search extends Component {
     constructor(props) {
         super(props)
-        this.state = {  }
+        this.state = { 
+            input: ''
+         }
     }
 
     render() { 
@@ -17,7 +19,7 @@ class Search extends Component {
                 />
                 <View style={styles.input}>
                     <Image source={require('../../assets/list_search.png')} />
-                    <TextInput />
+                    <TextInput value={this.state.input} onChangeText={(text) => this.setState({input: text})} />
                 </View>
             </View>
          )
