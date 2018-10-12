@@ -10,7 +10,7 @@ class Bookmarks extends Component {
     render() { 
         return ( 
             <View>
-                <Header screen='Bookmarks' />
+                <Header screen='Search' />
             </View>
          )
     }
