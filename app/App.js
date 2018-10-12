@@ -35,8 +35,8 @@ const StackNavigator = createStackNavigator(
 const App = () => {
   return (
     <Provider store={store}>
-        <StackNavigator />
-      </Provider> 
+      <StackNavigator />
+    </Provider> 
   )
 }
 
