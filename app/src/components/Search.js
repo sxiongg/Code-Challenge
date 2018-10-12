@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Image, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { API_KEY } from 'react-native-dotenv'
 import Header from './Header'
-import Place from './Place'
 import axios from 'axios'
 import { connect } from 'react-redux' 
 import { setSearchResults } from '../../redux/actions';
@@ -41,14 +41,14 @@ class Search extends Component {
                             this.setState({ input: text })
                             // Make API call only when user enters 3 or more characters.
                             if (text.length > 3) {
-                                this.getPlaces('AIzaSyDrO7cL1HVJZEVWEzbhUWGUJ7aKhrge8xI', text)
+                                this.getPlaces(API_KEY, text)
                             }
                         }} 
                     />
                 </View>
                 {/* Results List */}
                 <View>
-                    
+
                 </View>
             </View>
          )
