@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
+import Header from './Header'
 
 class Search extends Component {
     constructor(props) {
@@ -8,7 +9,9 @@ class Search extends Component {
     }
     render() { 
         return ( 
-            <View />
+            <View>
+                <Header screen='Search' />
+            </View>
          )
     }
 }

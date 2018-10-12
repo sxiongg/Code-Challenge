@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, TouchableOpacity, StyleSheet, Text } from 'react-native'
 import Header from './Header'
 
 class Bookmarks extends Component {
@@ -11,9 +11,15 @@ class Bookmarks extends Component {
         return ( 
             <View>
                 <Header screen='Bookmarks' />
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Search')}>
+                    <Text> Add New Place </Text>
+                </TouchableOpacity>
             </View>
          )
     }
 }
- 
+
+const styles = StyleSheet.create({
+
+})
 export default Bookmarks
