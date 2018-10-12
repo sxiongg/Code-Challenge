@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View, Image, TextInput, StyleSheet } from 'react-native'
+import { View, Image, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import Header from './Header'
+import Place from './Place'
 import axios from 'axios'
 import { connect } from 'react-redux' 
 import { setSearchResults } from '../../redux/actions';
@@ -33,16 +34,21 @@ class Search extends Component {
                 {/* Search Input Field */}
                 <View style={styles.input}>
                     <Image source={require('../../assets/list_search.png')} />
+
                     <TextInput 
                         value={this.state.input} 
                         onChangeText={(text) => {
                             this.setState({ input: text })
+                            // Make API call only when user enters 3 or more characters.
                             if (text.length > 3) {
-                                
                                 this.getPlaces('AIzaSyDrO7cL1HVJZEVWEzbhUWGUJ7aKhrge8xI', text)
                             }
                         }} 
                     />
+                </View>
+                {/* Results List */}
+                <View>
+                    
                 </View>
             </View>
          )
@@ -61,10 +67,10 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
+export default connect(mapStateToProps, mapDispatchToProps)(Search)
+
 const styles = StyleSheet.create({
     input: {
         flexDirection: 'row'
     }
 })
-
-export default connect(mapStateToProps, mapDispatchToProps)(Search)
