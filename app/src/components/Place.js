@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { 
     View, 
     Image,
-    ImageBackground,
     Dimensions,
     Text,
-    StyleSheet 
+    StyleSheet,
+    AsyncStorage 
 } from 'react-native'
+import Bookmark from './Bookmark'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { API_KEY } from 'react-native-dotenv'
@@ -17,21 +18,31 @@ class Place extends Component {
     constructor(props) {
         super(props)
         this.state = { 
-            photo: ''
+            photo: '',
+            bookmark: false
          }
     }
 
     componentDidMount () {
+        // Get Place Photo when component mounts
         let url = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=' + width + '&photoreference=' + this.props.place.photos[0].photo_reference + '&key=' + API_KEY
         axios.get(url)
             .then(res => {
-                console.log(res)
+                console.log(res.request.responseURL)
                 this.setState({ photo: res.request.responseURL })
+            })
+        // Check local storage for bookmark; set bookmark state to true/false
+        AsyncStorage.getItem(this.props.place.name)
+            .then(value => {
+                if (value !== null) {
+                    this.setState({ bookmark: true })
+                }
             })
     }
 
     render() { 
         let { formatted_address, name } = this.props.place
+
         // Remove ', USA' from end of address
         let lastIndex = formatted_address.length - 1
         let address = formatted_address.substring(0, lastIndex - 4)
@@ -42,6 +53,7 @@ class Place extends Component {
                 <View style={styles.detailsContainer}>
                     <Text style={styles.name}> { name.substring() } </Text>
                     <Text style={styles.address}> {address} </Text>
+                    <Bookmark {...this.state} />
                 </View>
             </View>
          )
@@ -70,7 +82,7 @@ const styles = StyleSheet.create({
     name: {
         fontSize: moderateScale(20),
         fontFamily: 'Helvetica Neue',
-        marginTop: scale(10)
+        marginTop: scale(13)
     },
     address: {
         fontSize: moderateScale(12),
