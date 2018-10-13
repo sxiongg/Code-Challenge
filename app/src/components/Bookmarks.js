@@ -11,6 +11,7 @@ class Bookmarks extends Component {
         return ( 
             <View>
                 <Header screen='Bookmarks' />
+                
                 {/* Button that routes to Search screen */}
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Search')}>
                     <Text> Add New Place </Text>

@@ -1,5 +1,13 @@
 import React, { Component } from 'react'
-import { View, Image, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { 
+    View, 
+    Image, 
+    TextInput, 
+    FlatList, 
+    Text, 
+    TouchableOpacity, 
+    StyleSheet 
+    } from 'react-native'
 import { API_KEY } from 'react-native-dotenv'
 import Header from './Header'
 import axios from 'axios'
@@ -24,6 +32,12 @@ class Search extends Component {
             })
     }
 
+    renderItem = (searchResult) => (
+        <TouchableOpacity>
+            <Text> {searchResult.description} </Text>
+        </TouchableOpacity>
+    )
+
     render() { 
         return ( 
             <View>
@@ -37,10 +51,10 @@ class Search extends Component {
 
                     <TextInput 
                         value={this.state.input} 
-                        onChangeText={(text) => {
+                        onChangeText={text => {
                             this.setState({ input: text })
                             // Make API call only when user enters 3 or more characters.
-                            if (text.length > 3) {
+                            if (text.length > 2) {
                                 this.getPlaces(API_KEY, text)
                             }
                         }} 
@@ -48,7 +62,14 @@ class Search extends Component {
                 </View>
                 {/* Results List */}
                 <View>
-
+                    {/* Used a map() function due to issues with re-rendering data in FlatList. */}
+                    {this.props.searchResults.map((item, index) => {
+                        return (
+                            <TouchableOpacity key='index'>
+                                <Text> {item.description} </Text>
+                            </TouchableOpacity>
+                        )
+                    })}
                 </View>
             </View>
          )
@@ -57,7 +78,7 @@ class Search extends Component {
 
 const mapStateToProps = state => {
     return {
-        // sendResToRedux: state.searchResults
+        searchResults: state.searchResults
     }
 }
 
