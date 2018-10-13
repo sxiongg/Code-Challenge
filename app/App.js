@@ -1,12 +1,11 @@
 import React from 'react'
 import { createStackNavigator } from 'react-navigation'
 import { Provider } from 'react-redux'
-import { Image, TouchableOpacity } from 'react-native'
-import BackButton from './assets/Button-Back.png'
 import store from './redux/store'
 import Search from './src/components/Search'
 import Bookmarks from './src/components/Bookmarks'
 import Place from './src/components/Place'
+import BackButton from './src/components/Back-Button'
 
 const StackNavigator = createStackNavigator(
   // Navigation for app with React Navigation
@@ -39,9 +38,8 @@ const StackNavigator = createStackNavigator(
             fontFamily: 'HelveticaNeue-Light'
           },
           headerLeft: 
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Image source={BackButton}/>
-            </TouchableOpacity>
+          // Custom back button
+            <BackButton goBack={() => navigation.navigate('Bookmarks')} />
         }  
       }
     },
@@ -54,9 +52,9 @@ const StackNavigator = createStackNavigator(
             borderBottomWidth: 0
           },
           headerLeft: 
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Image source={BackButton}/>
-            </TouchableOpacity>
+          // Custom back button
+            <BackButton goBack={() => navigation.goBack()} />
+
         }  
       }
     }
