@@ -43,15 +43,22 @@ class Place extends Component {
     setBookmark (place) {
         let key = place.place_id
         let value = JSON.stringify(place)
+        // Set place in local storage
         AsyncStorage.setItem(key, value).then(res => console.log(res))
+        // Change bookmarked state to true which changes bookmark component
+        this.setState({ bookmark: true })
     }
 
     removeBookmark (place) {
         let key = place.place_id
+        // Remove place from local storage
         AsyncStorage.removeItem(key).then(res => console.log(res))
+        // Change bookmarked state to false which changes bookmark component
+        this.setState({ bookmark: false })
     }
 
     render() { 
+        // Destructuring of props
         let { formatted_address, name } = this.props.place
 
         // Remove ', USA' from end of address
