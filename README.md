@@ -13,7 +13,7 @@ Name: Sia Xiong
 
 Email: s.marie.xiong@gmail.com
 
-Resume: https://drive.google.com/file/d/1q0k1YB-tl0GgXF57PQnSmR1bYR34mIVw/view?usp=sharing
+Resume: [Google Drive](https://drive.google.com/file/d/1q0k1YB-tl0GgXF57PQnSmR1bYR34mIVw/view?usp=sharing)
 
 ## Intro
 
