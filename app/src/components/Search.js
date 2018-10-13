@@ -12,7 +12,7 @@ import { API_KEY } from 'react-native-dotenv'
 import Header from './Header'
 import axios from 'axios'
 import { connect } from 'react-redux' 
-import { setSearchResults } from '../../redux/actions';
+import { setSearchResults, setPlaceDetails } from '../../redux/actions';
 
 class Search extends Component {
     constructor(props) {
@@ -22,21 +22,24 @@ class Search extends Component {
          }
     }
 
-    getPlaces = (APIKey, input) => {
+    getPlaces = (apiKey, input) => {
         // Function that creates URL string for autocomplete request and sends response to Redux.
-        let url = 'https://maps.googleapis.com/maps/api/place/autocomplete/' + 'json?' + 'input=' + input + '&key=' + APIKey
+        let url = 'https://maps.googleapis.com/maps/api/place/autocomplete/' + 'json?' + 'input=' + input + '&key=' + apiKey
         axios.get(url)
             .then(res => {
-                console.log(res)
-                this.props.sendResToRedux(res.data.predictions)
+                console.log(res.data)
+                this.props.sendResultsToRedux(res.data.predictions)
             })
     }
 
-    renderItem = (searchResult) => (
-        <TouchableOpacity>
-            <Text> {searchResult.description} </Text>
-        </TouchableOpacity>
-    )
+    getPlaceDetail = place => {
+        let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + place.place_id + '&fields=name,formatted_address&key=' + API_KEY
+        axios.get(url)
+            .then(res => {
+                console.log(res.data.result)
+                this.props.sendPlaceDetailsToRedux(res.data.result)
+            })
+    }
 
     render() { 
         return ( 
@@ -45,10 +48,10 @@ class Search extends Component {
                     screen='Search' 
                     goBack={() => this.props.navigation.goBack()} 
                 />
+
                 {/* Search Input Field */}
                 <View style={styles.input}>
                     <Image source={require('../../assets/list_search.png')} />
-
                     <TextInput 
                         value={this.state.input} 
                         onChangeText={text => {
@@ -60,12 +63,15 @@ class Search extends Component {
                         }} 
                     />
                 </View>
+
                 {/* Results List */}
                 <View>
                     {/* Used a map() function due to issues with re-rendering data in FlatList. */}
                     {this.props.searchResults.map((item, index) => {
                         return (
-                            <TouchableOpacity key='index'>
+                            <TouchableOpacity 
+                                onPress={() => this.getPlaceDetail(item)}
+                                key={index}>
                                 <Text> {item.description} </Text>
                             </TouchableOpacity>
                         )
@@ -84,7 +90,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        sendResToRedux: res => dispatch(setSearchResults(res))
+        sendResultsToRedux: res => dispatch(setSearchResults(res)),
+        sendPlaceDetailsToRedux: res => dispatch(setPlaceDetails(res))
     }
 }
 

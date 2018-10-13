@@ -1,5 +1,6 @@
 const initialState = {
-    searchResults: []
+    searchResults: [],
+    placeDetails: []
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -10,6 +11,12 @@ const rootReducer = (state = initialState, action) => {
                 searchResults: action.payload
             }
             console.log(state.searchResults)
+        case 'SET_PLACE_DETAILS':
+            state = {
+                ...state,
+                placeDetails: action.payload
+            }
+            // console.log(state.placeDetails)
         default: 
             return state
     }
