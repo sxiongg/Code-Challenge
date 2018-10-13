@@ -14,7 +14,15 @@ const StackNavigator = createStackNavigator(
     Bookmarks: {
       screen: Bookmarks,
       navigationOptions: {
-        headerTitle: 'Bookmarks'
+        headerTitle: 'Bookmarks',
+        headerStyle: {
+          backgroundColor: 'transparent',
+          borderBottomWidth: 0
+        },
+        headerTitleStyle: {
+          fontWeight: undefined,
+          fontFamily: 'HelveticaNeue-Light'
+        }
       }
     },
     Search: {
@@ -22,6 +30,14 @@ const StackNavigator = createStackNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           headerTitle: 'Search',
+          headerStyle: {
+            backgroundColor: 'transparent',
+            borderBottomWidth: 0
+          },
+          headerTitleStyle: {
+            fontWeight: undefined,
+            fontFamily: 'HelveticaNeue-Light'
+          },
           headerLeft: 
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Image source={BackButton}/>
@@ -33,6 +49,10 @@ const StackNavigator = createStackNavigator(
       screen: Place,
       navigationOptions: ({ navigation }) => {
         return {
+          headerStyle: {
+            backgroundColor: 'transparent',
+            borderBottomWidth: 0
+          },
           headerLeft: 
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Image source={BackButton}/>

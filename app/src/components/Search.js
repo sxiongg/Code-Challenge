@@ -25,20 +25,21 @@ class Search extends Component {
         // Function that creates URL string for autocomplete request and sends response to Redux.
         let url = 'https://maps.googleapis.com/maps/api/place/autocomplete/' + 'json?' + 'input=' + input + '&key=' + apiKey
         axios.get(url)
-            .then(res => {
-                console.log(res.data)
-                this.props.sendResultsToRedux(res.data.predictions)
+            .then(({ data }) => {
+                console.log(data)
+                this.props.sendResultsToRedux(data.predictions)
             })
     }
 
     getPlaceDetail = place => {
         let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + place.place_id + '&fields=name,formatted_address,photo&key=' + API_KEY
         axios.get(url)
-            .then(res => {
-                console.log(res.data.result)
-                this.props.sendPlaceDetailsToRedux(res.data.result)
-                this.props.navigation.navigate('Place')
+            .then( ({ data: {result} }) => {
+                console.log(result)
+                this.props.sendPlaceDetailsToRedux(result)
+                // console.log(res.data.result.photos[0])
             })
+        this.props.navigation.navigate('Place')
     }
 
     render() { 
