@@ -20,7 +20,7 @@ class Bookmarks extends Component {
 
     async componentDidMount() {
         // Using AsyncStorage, when the Bookmarks screen mounts it will retrieve all stored keys, 
-        // get the key values with MultiGet, and then parse the stringified data to JSON. 
+        // get the key values with MultiGet, and then parse the stringified data to JSON. See fetchAllBookmarks below.
     }
 
     renderItem = ({ name, formatted_address, photo }) => (
@@ -51,7 +51,7 @@ class Bookmarks extends Component {
     }
 }
 
-const fetchAllItems = async () => {
+const fetchAllBookmarks = async () => {
     try {
         const keys = await AsyncStorage.getAllKeys()
         const items = await AsyncStorage.multiGet(keys)
