@@ -16,7 +16,7 @@ const StackNavigator = createStackNavigator(
       navigationOptions: {
         headerTitle: 'Bookmarks',
         headerStyle: {
-          backgroundColor: 'transparent',
+          backgroundColor: '#FFF',
           borderBottomWidth: 0
         },
         headerTitleStyle: {
@@ -31,7 +31,7 @@ const StackNavigator = createStackNavigator(
         return {
           headerTitle: 'Search',
           headerStyle: {
-            backgroundColor: 'transparent',
+            backgroundColor: '#FFF',
             borderBottomWidth: 0
           },
           headerTitleStyle: {

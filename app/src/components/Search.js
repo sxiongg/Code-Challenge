@@ -12,6 +12,7 @@ import { API_KEY } from 'react-native-dotenv'
 import axios from 'axios'
 import { connect } from 'react-redux' 
 import { setSearchResults, setPlaceDetails } from '../../redux/actions';
+import {scale, verticalScale, moderateScale} from '../style-scaling'
 
 class Search extends Component {
     constructor(props) {
@@ -44,10 +45,10 @@ class Search extends Component {
 
     render() { 
         return ( 
-            <View>
+            <View style={styles.container}>
                 {/* Search Input Field */}
-                <View style={styles.input}>
-                    <Image source={require('../../assets/list_search.png')} />
+                <View style={styles.inputContainer}>
+                    <Image source={require('../../assets/list_search.png')} style={styles.icon} />
                     <TextInput 
                         value={this.state.input} 
                         onChangeText={text => {
@@ -57,18 +58,22 @@ class Search extends Component {
                                 this.getPlaces(API_KEY, text)
                             }
                         }} 
+                        style={[styles.input, styles.font]}
                     />
                 </View>
 
                 {/* Results List */}
-                <View>
+                <View style={styles.resultsContainer}>
                     {/* Used a map() function due to issues with re-rendering data in FlatList. */}
                     {this.props.searchResults.map((item, index) => {
+                        // Separate place name from location details 
+                        let indexOfFirstComma = item.description.search(',')
+                        let placeName = item.description.substring(0, indexOfFirstComma)
+                        let placeDetails = item.description.substring(indexOfFirstComma + 2)
                         return (
-                            <TouchableOpacity 
-                                onPress={() => this.getPlaceDetail(item)}
-                                key={index}>
-                                <Text> {item.description} </Text>
+                            <TouchableOpacity onPress={() => this.getPlaceDetail(item)} key={index} style={styles.item}>
+                                <Text> {placeName} </Text>
+                                <Text style={{ fontSize: scale(12)}}> {placeDetails} </Text>
                             </TouchableOpacity>
                         )
                     })}
@@ -94,7 +99,37 @@ const mapDispatchToProps = dispatch => {
 export default connect(mapStateToProps, mapDispatchToProps)(Search)
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: '#FFF',
+    },
+    inputContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: moderateScale(320),
+        height: verticalScale(35),
+        backgroundColor: '#eaecef',
+        borderRadius: 6,
+    },
     input: {
-        flexDirection: 'row'
+      flex: 1 
+    },
+    icon: {
+        alignSelf: 'center',
+        marginLeft: scale(10),
+        marginRight: scale(10)
+    },
+    resultsContainer: {
+        width: moderateScale(300)
+    },
+    item: {
+        paddingBottom: scale(12),
+        paddingTop: scale(12),
+        borderBottomWidth: 1,
+        borderColor: '#eaecef'
+    },
+    font: {
+        fontFamily: 'HelveticaNeue-Light'
     }
 })
