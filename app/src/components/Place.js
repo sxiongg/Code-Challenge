@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { 
+    View, 
+    StyleSheet 
+} from 'react-native'
+import { connect } from 'react-redux'
 
 class Place extends Component {
     constructor(props) {
@@ -9,10 +13,14 @@ class Place extends Component {
     render() { 
         return ( 
             <View>
-                
+
             </View>
          )
     }
 }
  
 export default Place;
+
+const styles = StyleSheet.create({ 
+
+})

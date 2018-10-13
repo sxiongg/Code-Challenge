@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, TouchableOpacity, Image, Text, StyleSheet } from 'react-native'
+import { 
+    View, 
+    TouchableOpacity, 
+    Image, 
+    Text, 
+    StyleSheet 
+} from 'react-native'
 
 const BookmarkItem = (props) => {
     return (

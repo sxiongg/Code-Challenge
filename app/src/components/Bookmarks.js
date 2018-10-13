@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, StyleSheet, Text } from 'react-native'
+import { 
+    View, 
+    TouchableOpacity, 
+    StyleSheet, 
+    Text 
+} from 'react-native'
 
 class Bookmarks extends Component {
     constructor(props) {
@@ -9,7 +14,7 @@ class Bookmarks extends Component {
     render() { 
         return ( 
             <View>
-                {/* Button that routes to Search screen */}
+                {/* Button that navigates to Search screen */}
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Search')}>
                     <Text> Add New Place </Text>
                 </TouchableOpacity>
@@ -18,7 +23,9 @@ class Bookmarks extends Component {
     }
 }
 
+export default Bookmarks
+
+
 const styles = StyleSheet.create({
 
 })
-export default Bookmarks
