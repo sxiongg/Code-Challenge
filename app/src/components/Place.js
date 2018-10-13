@@ -42,7 +42,7 @@ class Place extends Component {
 
     setBookmark (place) {
         let key = place.place_id
-        let value = JSON.stringify(place)
+        let value = JSON.stringify({...place, ...this.state.photo})
         // Set place in local storage
         AsyncStorage.setItem(key, value).then(res => console.log(res))
         // Change bookmarked state to true which changes bookmark component

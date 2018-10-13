@@ -1,50 +1,64 @@
 import React, { Component } from 'react'
-import { 
-    View, 
-    TouchableOpacity, 
-    StyleSheet, 
+import {
+    View,
+    TouchableOpacity,
+    StyleSheet,
     Text,
-    AsyncStorage 
+    FlatList,
+    AsyncStorage
 } from 'react-native'
-import {scale, verticalScale, moderateScale} from '../style-scaling'
+import BookmarkItem from './Bookmark-Item'
+import { scale, verticalScale, moderateScale } from '../style-scaling'
 
 class Bookmarks extends Component {
     constructor(props) {
         super(props)
-        this.state = { 
+        this.state = {
             userBookmarks: []
-         }
+        }
     }
 
-    componentDidMount () {
+    async componentDidMount() {
         // Using AsyncStorage, when the Bookmarks screen mounts it will retrieve all stored keys, 
         // get the key values with MultiGet, and then parse the stringified data to JSON. 
-        AsyncStorage.getAllKeys()
-            .then(res => {
-                AsyncStorage.multiGet(res)
-                    .then(res => {
-                        console.log(res)
-                        let bookmarksArr = res.map(item => {
-                            return JSON.parse(item[1])
-                        })
-                        this.setState({ userBookmarks: bookmarksArr })
-                        console.log(this.state.userBookmarks)
-                    })    
-        })
     }
 
-    render() { 
-        return ( 
+    renderItem = ({ name, formatted_address, photo }) => (
+        <BookmarkItem
+            uri={photo}
+            place={name}
+            address={formatted_address}
+        />
+    )
+
+    render() {
+        return (
             <View style={styles.container}>
+                {/* <TouchableOpacity onPress={() => AsyncStorage.clear()}><Text>sjhjdkf</Text></TouchableOpacity> */}
                 {/* Bookmarks List */}
-                <View></View>
+                <FlatList
+                    data={this.state.userBookmarks}
+                    keyExtractor={(item, index) => item.place_id}
+                    renderItem={this.renderItem}
+                />
 
                 {/* Button that navigates to Search screen */}
-                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Search')}>
-                        <Text style={{...styles.font, color: '#FFF'}}> Add New Place </Text>
-                    </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Search')}>
+                    <Text style={{ ...styles.font, color: '#FFF' }}> Add New Place </Text>
+                </TouchableOpacity>
             </View>
-         )
+        )
+    }
+}
+
+const fetchAllItems = async () => {
+    try {
+        const keys = await AsyncStorage.getAllKeys()
+        const items = await AsyncStorage.multiGet(keys)
+        console.log(items)
+        return items.map(item => JSON.parse(item[1]))
+    } catch (error) {
+        console.log(error, "Error getting local storage data.")
     }
 }
 
