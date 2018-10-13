@@ -8,7 +8,9 @@ class Place extends Component {
     }
     render() { 
         return ( 
-            <View />
+            <View>
+                
+            </View>
          )
     }
 }

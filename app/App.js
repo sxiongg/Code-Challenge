@@ -1,30 +1,43 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { createStackNavigator } from 'react-navigation'
 import { Provider } from 'react-redux'
+import { Image, TouchableOpacity } from 'react-native'
+import BackButton from './assets/Button-Back.png'
 import store from './redux/store'
 import Search from './src/components/Search'
 import Bookmarks from './src/components/Bookmarks'
 import Place from './src/components/Place'
 
 const StackNavigator = createStackNavigator(
-  // Navigation for app with React Navigation. Built in headers are removed.
+  // Navigation for app with React Navigation
   {
     Bookmarks: {
       screen: Bookmarks,
       navigationOptions: {
-        header: null
+        headerTitle: 'Bookmarks'
       }
     },
     Search: {
       screen: Search,
-      navigationOptions: {
-        header: null
+      navigationOptions: ({ navigation }) => {
+        return {
+          headerTitle: 'Search',
+          headerLeft: 
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Image source={BackButton}/>
+            </TouchableOpacity>
+        }  
       }
     },
     Place: {
       screen: Place,
-      navigationOptions: {
-        header: null
+      navigationOptions: ({ navigation }) => {
+        return {
+          headerLeft: 
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Image source={BackButton}/>
+            </TouchableOpacity>
+        }  
       }
     }
   },
@@ -35,7 +48,7 @@ const StackNavigator = createStackNavigator(
 
 const App = () => {
   return (
-    // Redux wrapper.
+    // Redux wrapper
     <Provider store={store}>
       <StackNavigator />
     </Provider> 

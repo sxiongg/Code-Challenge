@@ -1,12 +1,18 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { 
+    View, 
+    Text, 
+    Image, 
+    StyleSheet, 
+    TouchableOpacity 
+} from 'react-native'
 import BackButton from '../../assets/Button-Back.png'
 
 const RenderBackButton = ({screen, goBack}) => {
     // Function that conditionally renders back button if the screen is Search.
     if (screen === 'Search') {
         return (
-            <TouchableOpacity onPress={() => goBack}>
+            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
                 <Image source={BackButton} />
             </TouchableOpacity>
         )

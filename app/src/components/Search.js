@@ -7,7 +7,7 @@ import {
     Text, 
     TouchableOpacity, 
     StyleSheet 
-    } from 'react-native'
+} from 'react-native'
 import { API_KEY } from 'react-native-dotenv'
 import Header from './Header'
 import axios from 'axios'
@@ -33,7 +33,7 @@ class Search extends Component {
     }
 
     getPlaceDetail = place => {
-        let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + place.place_id + '&fields=name,formatted_address&key=' + API_KEY
+        let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + place.place_id + '&fields=name,formatted_address,photo&key=' + API_KEY
         axios.get(url)
             .then(res => {
                 console.log(res.data.result)
@@ -44,11 +44,6 @@ class Search extends Component {
     render() { 
         return ( 
             <View>
-                <Header 
-                    screen='Search' 
-                    goBack={() => this.props.navigation.goBack()} 
-                />
-
                 {/* Search Input Field */}
                 <View style={styles.input}>
                     <Image source={require('../../assets/list_search.png')} />
