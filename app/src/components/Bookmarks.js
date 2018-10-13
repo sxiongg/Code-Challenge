@@ -11,11 +11,26 @@ import {scale, verticalScale, moderateScale} from '../style-scaling'
 class Bookmarks extends Component {
     constructor(props) {
         super(props)
-        this.state = {  }
+        this.state = { 
+            userBookmarks: []
+         }
     }
 
     componentDidMount () {
-        AsyncStorage.getAllKeys().then(res => console.log(res))
+        // Using AsyncStorage, when the Bookmarks screen mounts it will retrieve all stored keys, 
+        // get the key values with MultiGet, and then parse the stringified data to JSON. 
+        AsyncStorage.getAllKeys()
+            .then(res => {
+                AsyncStorage.multiGet(res)
+                    .then(res => {
+                        console.log(res)
+                        let bookmarksArr = res.map(item => {
+                            return JSON.parse(item[1])
+                        })
+                        this.setState({ userBookmarks: bookmarksArr })
+                        console.log(this.state.userBookmarks)
+                    })    
+        })
     }
 
     render() { 
