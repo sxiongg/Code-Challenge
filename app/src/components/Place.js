@@ -32,12 +32,23 @@ class Place extends Component {
                 this.setState({ photo: res.request.responseURL })
             })
         // Check local storage for bookmark; set bookmark state to true/false
-        AsyncStorage.getItem(this.props.place.name)
+        AsyncStorage.getItem(this.props.place.place_id)
             .then(value => {
                 if (value !== null) {
                     this.setState({ bookmark: true })
                 }
             })
+    }
+
+    setBookmark (place) {
+        let key = place.place_id
+        let value = JSON.stringify(place)
+        AsyncStorage.setItem(key, value).then(res => console.log(res))
+    }
+
+    removeBookmark (place) {
+        let key = place.place_id
+        AsyncStorage.removeItem(key).then(res => console.log(res))
     }
 
     render() { 
@@ -53,7 +64,11 @@ class Place extends Component {
                 <View style={styles.detailsContainer}>
                     <Text style={styles.name}> { name.substring() } </Text>
                     <Text style={styles.address}> {address} </Text>
-                    <Bookmark {...this.state} />
+                    <Bookmark 
+                        bookmark={this.state.bookmark}
+                        removeBookmark={() => this.removeBookmark(this.props.place)}
+                        setBookmark={() => this.setBookmark(this.props.place)}
+                    />
                 </View>
             </View>
          )

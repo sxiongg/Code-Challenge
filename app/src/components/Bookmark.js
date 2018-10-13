@@ -1,16 +1,21 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, Dimensions, AsyncStorage } from 'react-native'
+import { 
+    TouchableOpacity, 
+    Text, 
+    StyleSheet, 
+    Dimensions 
+} from 'react-native'
 import {scale, verticalScale, moderateScale} from '../style-scaling'
 const { width, height } = Dimensions.get('window')
 
-export default Bookmark = ({bookmark}) => (
-    bookmark
+export default Bookmark = (props) => (
+    props.bookmark
     ?
-    <TouchableOpacity style={{...styles.bookmark, backgroundColor: '#29BF12'}}>
+    <TouchableOpacity onPress={props.removeBookmark} style={{...styles.bookmark, backgroundColor: '#29BF12'}}>
         <Text style={styles.font}> Bookmarked </Text>
     </TouchableOpacity>
     :
-    <TouchableOpacity style={{...styles.bookmark, backgroundColor: '#0404CE'}}>
+    <TouchableOpacity onPress={props.setBookmark} style={{...styles.bookmark, backgroundColor: '#0404CE'}}>
         <Text style={styles.font}> Bookmark </Text>
     </TouchableOpacity>
 )

@@ -3,7 +3,8 @@ import {
     View, 
     TouchableOpacity, 
     StyleSheet, 
-    Text 
+    Text,
+    AsyncStorage 
 } from 'react-native'
 import {scale, verticalScale, moderateScale} from '../style-scaling'
 
@@ -12,6 +13,11 @@ class Bookmarks extends Component {
         super(props)
         this.state = {  }
     }
+
+    componentDidMount () {
+        AsyncStorage.getAllKeys().then(res => console.log(res))
+    }
+
     render() { 
         return ( 
             <View style={styles.container}>

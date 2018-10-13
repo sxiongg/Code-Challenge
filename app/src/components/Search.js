@@ -33,9 +33,10 @@ class Search extends Component {
     }
 
     getPlaceDetail = async (place) => {
-        let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + place.place_id + '&fields=name,formatted_address,photo&key=' + API_KEY
+        let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + place.place_id + '&fields=name,formatted_address,photo,place_id&key=' + API_KEY
         let details = await axios.get(url).then(res => res.data.result)
         await this.props.sendPlaceDetailsToRedux(details)
+        console.log(details)
         this.props.navigation.navigate('Place')
     }
 
