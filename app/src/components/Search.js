@@ -36,13 +36,6 @@ class Search extends Component {
         let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + place.place_id + '&fields=name,formatted_address,photo&key=' + API_KEY
         let details = await axios.get(url).then(res => res.data.result)
         await this.props.sendPlaceDetailsToRedux(details)
-
-
-            // .then( ({ data: {result} }) => {
-            //     console.log(result)
-            //     this.props.sendPlaceDetailsToRedux(result)
-            //     // console.log(res.data.result.photos[0])
-            // })
         this.props.navigation.navigate('Place')
     }
 

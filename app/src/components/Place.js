@@ -8,28 +8,32 @@ import {
     StyleSheet 
 } from 'react-native'
 import { connect } from 'react-redux'
+import axios from 'axios'
+import { API_KEY } from 'react-native-dotenv'
 const {height, width} = Dimensions.get('window')
 
 class Place extends Component {
     constructor(props) {
         super(props)
         this.state = { 
-            place: {}
+            photo: ''
          }
     }
 
     componentDidMount () {
-        this.setState({ place: this.props.place })
-        console.log(this.props.place)
+        let url = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=' + width + '&photoreference=' + this.props.place.photos[0].photo_reference + '&key=' + API_KEY
+        axios.get(url)
+            .then(res => {
+                console.log(res)
+                this.setState({ photo: res.request.responseURL })
+            })
     }
+
     render() { 
         return ( 
             <View>
-                <ImageBackground 
-                    style={styles.image} 
-                    source={{uri: 'data:' + this.props.place.photos[0].photo_reference}}>
-                    <Text>alldkjgfdg</Text>
-                </ImageBackground>
+                <Image source={{uri: this.state.photo}} style={styles.image} />
+                <Text>alldkjgfdg</Text>
             </View>
          )
     }
@@ -46,6 +50,7 @@ export default connect(mapStateToProps)(Place)
 const styles = StyleSheet.create({ 
     image: {
         width: width,
-        height: height / 2
+        height: height / 2,
+        resizeMode: 'cover'
     }
 })
