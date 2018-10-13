@@ -32,14 +32,17 @@ class Search extends Component {
             })
     }
 
-    getPlaceDetail = place => {
+    getPlaceDetail = async (place) => {
         let url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + place.place_id + '&fields=name,formatted_address,photo&key=' + API_KEY
-        axios.get(url)
-            .then( ({ data: {result} }) => {
-                console.log(result)
-                this.props.sendPlaceDetailsToRedux(result)
-                // console.log(res.data.result.photos[0])
-            })
+        let details = await axios.get(url).then(res => res.data.result)
+        await this.props.sendPlaceDetailsToRedux(details)
+
+
+            // .then( ({ data: {result} }) => {
+            //     console.log(result)
+            //     this.props.sendPlaceDetailsToRedux(result)
+            //     // console.log(res.data.result.photos[0])
+            // })
         this.props.navigation.navigate('Place')
     }
 
@@ -66,14 +69,14 @@ class Search extends Component {
                 <View style={styles.resultsContainer}>
                     {/* Used a map() function due to issues with re-rendering data in FlatList. */}
                     {this.props.searchResults.map((item, index) => {
-                        // Separate place name from location details 
+                        // Separate place name from location details for better formatting
                         let indexOfFirstComma = item.description.search(',')
                         let placeName = item.description.substring(0, indexOfFirstComma)
                         let placeDetails = item.description.substring(indexOfFirstComma + 2)
                         return (
                             <TouchableOpacity onPress={() => this.getPlaceDetail(item)} key={index} style={styles.item}>
-                                <Text> {placeName} </Text>
-                                <Text style={{ fontSize: scale(12)}}> {placeDetails} </Text>
+                                <Text style={styles.font}> {placeName} </Text>
+                                <Text style={{ fontSize: scale(11)}}> {placeDetails} </Text>
                             </TouchableOpacity>
                         )
                     })}
@@ -130,6 +133,7 @@ const styles = StyleSheet.create({
         borderColor: '#eaecef'
     },
     font: {
-        fontFamily: 'HelveticaNeue-Light'
+        fontFamily: 'HelveticaNeue-Light',
+        fontSize: 13
     }
 })

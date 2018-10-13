@@ -16,7 +16,7 @@ class Bookmarks extends Component {
         return ( 
             <View style={styles.container}>
                 {/* Bookmarks List */}
-                <View><Text>dfdgfdg</Text></View>
+                <View></View>
 
                 {/* Button that navigates to Search screen */}
                     <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Search')}>

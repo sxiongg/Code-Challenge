@@ -13,17 +13,23 @@ const {height, width} = Dimensions.get('window')
 class Place extends Component {
     constructor(props) {
         super(props)
-        this.state = {  }
+        this.state = { 
+            place: {}
+         }
     }
 
+    componentDidMount () {
+        this.setState({ place: this.props.place })
+        console.log(this.props.place)
+    }
     render() { 
         return ( 
             <View>
-                {/* <ImageBackground 
+                <ImageBackground 
                     style={styles.image} 
                     source={{uri: 'data:' + this.props.place.photos[0].photo_reference}}>
                     <Text>alldkjgfdg</Text>
-                </ImageBackground> */}
+                </ImageBackground>
             </View>
          )
     }
