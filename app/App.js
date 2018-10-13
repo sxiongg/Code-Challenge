@@ -48,14 +48,6 @@ const StackNavigator = createStackNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           headerTransparent: true,
-          // headerStyle: {
-          //   backgroundColor: 'transparent',
-          //   position: 'absolute',
-          //   top: 0,
-          //   left: 0,
-          //   right: 0,
-          //   borderBottomWidth: 0
-          // },
           headerLeft: 
           // Custom back button
             <BackButton goBack={() => navigation.goBack()} />
