@@ -9,7 +9,6 @@ import {
     StyleSheet 
 } from 'react-native'
 import { API_KEY } from 'react-native-dotenv'
-import Header from './Header'
 import axios from 'axios'
 import { connect } from 'react-redux' 
 import { setSearchResults, setPlaceDetails } from '../../redux/actions';
@@ -38,6 +37,7 @@ class Search extends Component {
             .then(res => {
                 console.log(res.data.result)
                 this.props.sendPlaceDetailsToRedux(res.data.result)
+                this.props.navigation.navigate('Place')
             })
     }
 
