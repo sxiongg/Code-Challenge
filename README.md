@@ -7,14 +7,6 @@ TAPP Code Challenge for Software Engineer Candidates
 - [Requirements](#requirements)
 - [What We Are Looking For](#what-we-are-looking-for)
 
-## Candidate Information (Fill out with your info)
-
-Name: Sia Xiong
-
-Email: s.marie.xiong@gmail.com
-
-Resume: [Google Drive](https://drive.google.com/file/d/1q0k1YB-tl0GgXF57PQnSmR1bYR34mIVw/view?usp=sharing)
-
 ## Intro
 
 The goal of this challenge is to assess a candidate’s proficiency in Javascript, React Native and using APIs, by implementing a simple app that simulates a **Places Bookmark** feature.
